@@ -7,9 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +36,7 @@ public class UserController {
 		return new ResponseEntity<String>("User are deleted" , HttpStatus.OK);
 	}
 	
-	@PutMapping("update/{id}")
+	@PatchMapping("update/{id}")
 	public ResponseEntity<String> updateUser(@PathVariable int id , @RequestBody User user){
 		userService.updateUser(id, user);
 		return new ResponseEntity<String>("User are updated", HttpStatus.OK);

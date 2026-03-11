@@ -5,10 +5,12 @@ import lombok.Data;
 @Data
 public class EnrollementDto {
 	
-	private int userId;
+	private String name;
 	private int batchId;
-	private String enrollmentDate;
+	private String email;
+	private long contactNumber;
+	private String address;
 	private String mode;
 	private String status;
-
+	
 }

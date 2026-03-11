@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
@@ -25,6 +26,8 @@ public class Batches {
 	private Course course;
 	@ManyToMany(mappedBy = "batches")
 	private List<Trainner> trainners;
+	@OneToMany(mappedBy = "batch")
+	private List<Enrollement> enrollements;
 	
 
 
