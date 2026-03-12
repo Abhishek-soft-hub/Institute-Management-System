@@ -18,7 +18,6 @@ import com.example.demo.dto.EnrollementDto;
 import com.example.demo.entity.Enrollement;
 import com.example.demo.service.EnrollmentService;
 
-import jakarta.websocket.server.PathParam;
 
 @RestController
 public class EnrollmentController {

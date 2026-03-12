@@ -1,8 +1,7 @@
 package com.example.demo.dto;
 
-import java.util.List;
 
-import com.example.demo.entity.Trainner;
+
 
 import lombok.Data;
 
@@ -13,6 +12,5 @@ public class BatchDto {
 	private int capacity;
 	private String Date;
 	private int courseId;
-	private List<Trainner> trainnerIds;
 	
 }

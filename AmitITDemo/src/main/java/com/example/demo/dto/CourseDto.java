@@ -10,5 +10,4 @@ public class CourseDto {
 	private String syllabus;
 	private String duration;
 	private int fees;
-
 }

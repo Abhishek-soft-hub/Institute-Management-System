@@ -25,7 +25,7 @@ public class Batches {
 	@JoinColumn(name = "courseId")
 	private Course course;
 	@ManyToMany(mappedBy = "batches")
-	private List<Trainner> trainners;
+	private List<Trainner> trainner;
 	@OneToMany(mappedBy = "batch")
 	private List<Enrollement> enrollements;
 	
