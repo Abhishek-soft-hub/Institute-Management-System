@@ -1,6 +1,10 @@
 package com.example.demo.entity;
 
+import java.time.LocalDate;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,9 +24,11 @@ public class Batches {
 	private int id;
 	private String batchName;
 	private int capacity;
-	private String Date;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate date;
 	@ManyToOne
 	@JoinColumn(name = "courseId")
+	@JsonBackReference
 	private Course course;
 	@ManyToMany(mappedBy = "batches")
 	private List<Trainner> trainner;

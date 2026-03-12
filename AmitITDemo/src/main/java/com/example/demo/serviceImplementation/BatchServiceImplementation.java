@@ -10,6 +10,7 @@ import com.example.demo.dto.BatchDto;
 import com.example.demo.entity.Batches;
 import com.example.demo.entity.Course;
 import com.example.demo.exception.BatcheException;
+import com.example.demo.exception.CourseException;
 import com.example.demo.repository.BatchRepository;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.service.BatchService;
@@ -27,11 +28,14 @@ public class BatchServiceImplementation implements BatchService {
 		if (batchDto.getBatchName() == null || batchDto.getCapacity() == 0 || batchDto.getCourseId() == 0) {
 			throw new BatcheException("Please provide required fields", HttpStatus.BAD_REQUEST);
 		}
+		if(!courseRepository.existsById(batchDto.getCourseId())) {
+			throw new CourseException("This course are not found or not available right now", HttpStatus.NOT_FOUND);
+		}
 		Course course = courseRepository.findById(batchDto.getCourseId()).get();
 		Batches batch = new Batches();
 		batch.setBatchName(batchDto.getBatchName());
-		batch.setCapacity(batch.getCapacity());
-		batch.setDate(batch.getDate());
+		batch.setCapacity(batchDto.getCapacity());
+		batch.setDate(batchDto.getDate());
 		batch.setCourse(course);
 		batchRepository.save(batch);
 
