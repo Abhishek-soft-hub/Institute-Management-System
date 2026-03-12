@@ -29,8 +29,12 @@ public class TrainnerServiceImplimentation implements TrainnerService {
 
 	@Override
 	public void trainner(TrainnerDto trainnerDto) {
-		
-		
+
+		if (trainnerDto.getBatchIds().isEmpty() || trainnerDto.getUId() == 0 || trainnerDto.getExperince() == null
+				|| trainnerDto.getSpecialization() == null) {
+			throw new UserException("Please provide required fields", HttpStatus.BAD_REQUEST);
+		}
+
 		User user = userRepository.findById(trainnerDto.getUId()).get();
 		List<Batches> batchList = new ArrayList<>();
 
@@ -38,33 +42,43 @@ public class TrainnerServiceImplimentation implements TrainnerService {
 			Batches batches = batchRepository.findById(batcheId).get();
 			batchList.add(batches);
 		}
-		
+
 		Trainner trainner = new Trainner();
 		trainner.setUser(user);
 		trainner.setExperince(trainnerDto.getExperince());
 		trainner.setSpecialization(trainnerDto.getSpecialization());
 		trainner.setBatches(batchList);
-		
+
 		trainnerRepository.save(trainner);
 	}
 
 	@Override
 	public void deleteTrainner(int id) {
-		if(!trainnerRepository.existsById(id)) {
-			throw new UserException("Trainner not Found", HttpStatus.NOT_FOUND);
+		if (!trainnerRepository.existsById(id)) {
+			throw new UserException("Trainner are not Found", HttpStatus.NOT_FOUND);
 		}
 		trainnerRepository.deleteById(id);
 	}
 
 	@Override
 	public void updateTrainner(int id, Trainner updateTrainner) {
-		// TODO Auto-generated method stub
 
+		if (!trainnerRepository.existsById(id)) {
+			throw new UserException("Trainner are not found", HttpStatus.NOT_FOUND);
+		}
+		Trainner existTrainner = trainnerRepository.findById(id).get();
+
+		existTrainner.setBatches(updateTrainner.getBatches());
+		existTrainner.setExperince(updateTrainner.getExperince());
+		existTrainner.setSpecialization(updateTrainner.getSpecialization());
+		existTrainner.setUser(updateTrainner.getUser());
+
+		trainnerRepository.save(existTrainner);
 	}
 
 	@Override
 	public Trainner getTrainner(int id) {
-		if(!trainnerRepository.existsById(id)) {
+		if (!trainnerRepository.existsById(id)) {
 			throw new UserException("Trainner not Found", HttpStatus.NOT_FOUND);
 		}
 		return trainnerRepository.findById(id).get();
@@ -72,7 +86,7 @@ public class TrainnerServiceImplimentation implements TrainnerService {
 
 	@Override
 	public List<Trainner> trainners() {
-		if(trainnerRepository.findAll().isEmpty()) {
+		if (trainnerRepository.findAll().isEmpty()) {
 			throw new UserException("No records", HttpStatus.NOT_FOUND);
 		}
 		return trainnerRepository.findAll();

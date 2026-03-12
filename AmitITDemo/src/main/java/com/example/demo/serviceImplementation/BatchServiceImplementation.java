@@ -25,7 +25,7 @@ public class BatchServiceImplementation implements BatchService {
 	public void batch(BatchDto batchDto) {
 
 		if (batchDto.getBatchName() == null || batchDto.getCapacity() == 0 || batchDto.getCourseId() == 0) {
-			throw new BatcheException("Please Enter valid data", HttpStatus.BAD_REQUEST);
+			throw new BatcheException("Please provide required fields", HttpStatus.BAD_REQUEST);
 		}
 		Course course = courseRepository.findById(batchDto.getCourseId()).get();
 		Batches batch = new Batches();
@@ -47,8 +47,18 @@ public class BatchServiceImplementation implements BatchService {
 
 	@Override
 	public void updateBatch(int id, Batches updateBatch) {
-		// TODO Auto-generated method stub
+		if (!batchRepository.existsById(id)) {
+			throw new BatcheException("Batch not found", HttpStatus.NOT_FOUND);
+		}
 
+		Batches existBatches = batchRepository.findById(id).get();
+		existBatches.setBatchName(updateBatch.getBatchName());
+		existBatches.setCapacity(updateBatch.getCapacity());
+		existBatches.setCourse(updateBatch.getCourse());
+		existBatches.setDate(updateBatch.getDate());
+		
+		batchRepository.save(existBatches);
+		
 	}
 
 	@Override

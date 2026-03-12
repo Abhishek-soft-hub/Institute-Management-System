@@ -1,9 +1,12 @@
 package com.example.demo.globleException;
 
+
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.example.demo.exception.BatcheException;
 import com.example.demo.exception.CourseException;
 import com.example.demo.exception.UserException;
 
@@ -19,5 +22,10 @@ public class GlobleExceptionHandling {
     public ResponseEntity<String> courseServiceException(CourseException courseException){
         return new ResponseEntity<>(courseException.getMessage(), courseException.getHttpStatus());
     }
+	
+	@ExceptionHandler(exception = BatcheException.class)
+	public ResponseEntity<String> batchServiceException(BatcheException batcheException){
+		return new ResponseEntity<String>(batcheException.getMessage() , batcheException.getHttpStatus());
+	}
 
 }

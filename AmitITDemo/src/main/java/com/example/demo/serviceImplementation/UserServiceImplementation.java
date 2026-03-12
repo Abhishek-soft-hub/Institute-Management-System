@@ -48,7 +48,6 @@ public class UserServiceImplementation implements UserService {
 		User existUser = userRepository.findById(id)
 				.orElseThrow(() -> new UserException("User is not found", HttpStatus.NOT_FOUND));
 
-		if (existUser != null) {
 			existUser.setName(updateUser.getName());
 			existUser.setAddress(updateUser.getAddress());
 			existUser.setAdhaarNumber(updateUser.getAdhaarNumber());
@@ -63,7 +62,6 @@ public class UserServiceImplementation implements UserService {
 			existUser.setRole(updateUser.getRole());
 
 			userRepository.save(existUser);
-		}
 	}
 
 	@Override

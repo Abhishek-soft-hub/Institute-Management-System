@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 @Data
 @Entity
@@ -17,11 +17,8 @@ public class Enrollement {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int enrollmentId;
-	private String name;
-	private String email;
-	private long contactNumber;
-	private String address;
 	private LocalDate enrollmentDate;
+	private String mode;
 	private String status;
 	private Boolean liveSessionAccess;
 	private Boolean recordingAccess;
@@ -33,5 +30,7 @@ public class Enrollement {
 	@ManyToOne
 	@JoinColumn(name = "batchId")
 	private Batches batch;
-	
+	@OneToOne
+	@JoinColumn(name = "userId")
+	private User user;
 }

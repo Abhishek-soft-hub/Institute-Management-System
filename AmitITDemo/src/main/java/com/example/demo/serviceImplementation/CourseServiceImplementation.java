@@ -19,9 +19,9 @@ public class CourseServiceImplementation implements CourseService {
 
 	@Override
 	public void course(CourseDto coursedto) {
-		
-		if(coursedto.getCourseName()==null || coursedto.getDescription()==null || coursedto.getFees()==0) {
-			throw new CourseException("Please Enter valid data" , HttpStatus.BAD_REQUEST);
+
+		if (coursedto.getCourseName() == null || coursedto.getDescription() == null || coursedto.getFees() == 0) {
+			throw new CourseException("Please Enter required fields", HttpStatus.BAD_REQUEST);
 		}
 
 		Course course = new Course();
@@ -45,8 +45,18 @@ public class CourseServiceImplementation implements CourseService {
 
 	@Override
 	public void updateCourse(int id, Course updateCourse) {
-		// TODO Auto-generated method stub
+		if (!courseRepository.existsById(id)) {
+			throw new CourseException("This course currently not available", HttpStatus.NOT_FOUND);
+		}
 
+		Course existCourse = courseRepository.findById(id).get();
+		existCourse.setCourseName(updateCourse.getCourseName());
+		existCourse.setDescription(updateCourse.getDescription());
+		existCourse.setDuration(updateCourse.getDuration());
+		existCourse.setFees(updateCourse.getFees());
+		existCourse.setSyllabus(updateCourse.getSyllabus());
+		existCourse.setBatches(updateCourse.getBatches());
+		courseRepository.save(existCourse);
 	}
 
 	@Override
