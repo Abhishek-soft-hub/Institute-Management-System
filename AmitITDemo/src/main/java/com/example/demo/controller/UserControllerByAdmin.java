@@ -22,13 +22,13 @@ public class UserControllerByAdmin {
 	@Autowired
 	UserService userService;
 
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("user/delete/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable int id) {
 		userService.deleteUser(id);
 		return new ResponseEntity<String>("User are deleted", HttpStatus.OK);
 	}
 
-	@PatchMapping("update/{id}")
+	@PatchMapping("user/update/{id}")
 	public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody User user) {
 		userService.updateUser(id, user);
 		return new ResponseEntity<String>("User are updated", HttpStatus.OK);

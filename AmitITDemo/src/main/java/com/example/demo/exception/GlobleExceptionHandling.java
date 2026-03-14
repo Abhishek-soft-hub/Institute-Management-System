@@ -1,14 +1,10 @@
-package com.example.demo.globleException;
+package com.example.demo.exception;
 
 
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import com.example.demo.exception.BatcheException;
-import com.example.demo.exception.CourseException;
-import com.example.demo.exception.UserException;
 
 
 
