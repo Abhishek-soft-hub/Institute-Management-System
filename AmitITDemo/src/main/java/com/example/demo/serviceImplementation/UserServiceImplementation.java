@@ -7,7 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.UserDto;
-import com.example.demo.entity.User;
+
+import com.example.demo.entity.Users;
 import com.example.demo.exception.UserException;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
@@ -23,7 +24,7 @@ public class UserServiceImplementation implements UserService {
 		if (!userDto.getEmail().contains("@")) {
 			throw new UserException("Please provide valid Email", HttpStatus.BAD_REQUEST);
 		}
-		User user = new User();
+		Users user = new Users();
 		user.setName(userDto.getName());
 		user.setEmail(userDto.getEmail());
 		user.setPassword(userDto.getPassword());
@@ -43,9 +44,9 @@ public class UserServiceImplementation implements UserService {
 	}
 
 	@Override
-	public void updateUser(int id, User updateUser) {
+	public void updateUser(int id, Users updateUser) {
 
-		User existUser = userRepository.findById(id)
+		Users existUser = userRepository.findById(id)
 				.orElseThrow(() -> new UserException("User is not found", HttpStatus.NOT_FOUND));
 
 			existUser.setName(updateUser.getName());
@@ -65,13 +66,13 @@ public class UserServiceImplementation implements UserService {
 	}
 
 	@Override
-	public User getUser(int id) {
+	public Users getUser(int id) {
 
 		return userRepository.findById(id).orElseThrow(() -> new UserException("User not found", HttpStatus.NOT_FOUND));
 	}
 
 	@Override
-	public List<User> users() {
+	public List<Users> users() {
 		if (userRepository.findAll().isEmpty()) {
 			throw new UserException("No Records", HttpStatus.BAD_REQUEST);
 		}

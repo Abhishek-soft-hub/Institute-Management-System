@@ -21,7 +21,7 @@ public class Trainner {
 	private int id;
 	@OneToOne
 	@JoinColumn(name = "userId")
-	private User user;
+	private Users user;
 	private String specialization;
 	private String experince;
 	@ManyToMany

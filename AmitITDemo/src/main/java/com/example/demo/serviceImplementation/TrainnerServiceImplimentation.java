@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.TrainnerDto;
 import com.example.demo.entity.Batches;
 import com.example.demo.entity.Trainner;
-import com.example.demo.entity.User;
+import com.example.demo.entity.Users;
 import com.example.demo.exception.UserException;
 import com.example.demo.repository.BatchRepository;
 import com.example.demo.repository.TrainnerRepository;
@@ -35,7 +35,7 @@ public class TrainnerServiceImplimentation implements TrainnerService {
 			throw new UserException("Please provide required fields", HttpStatus.BAD_REQUEST);
 		}
 
-		User user = userRepository.findById(trainnerDto.getUId()).get();
+		Users user = userRepository.findById(trainnerDto.getUId()).get();
 		List<Batches> batchList = new ArrayList<>();
 
 		for (Integer batcheId : trainnerDto.getBatchIds()) {

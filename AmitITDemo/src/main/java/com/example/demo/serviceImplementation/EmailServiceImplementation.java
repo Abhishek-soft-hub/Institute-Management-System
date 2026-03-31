@@ -12,7 +12,7 @@ public class EmailServiceImplementation implements EmailService {
 	@Autowired
 	EmailOtpServiceRepository emailOtpServiceRepository;
 	
-	Email
+
 
 	@Override
 	public String sendOtp(String email) {

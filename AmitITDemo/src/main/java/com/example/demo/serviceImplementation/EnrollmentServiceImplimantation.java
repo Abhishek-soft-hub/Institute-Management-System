@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.EnrollementDto;
 import com.example.demo.entity.Batches;
 import com.example.demo.entity.Enrollement;
-
-import com.example.demo.entity.User;
-
+import com.example.demo.entity.Users;
 import com.example.demo.exception.UserException;
 import com.example.demo.repository.BatchRepository;
 import com.example.demo.repository.EnrollmentRepository;
@@ -36,7 +34,7 @@ public class EnrollmentServiceImplimantation implements EnrollmentService {
 		}
 		Batches batch = batchRepository.findById(enrollementDto.getBatchId()).get();
 
-		User user = userRepository.findById(enrollementDto.getUserId()).get();
+		Users user = userRepository.findById(enrollementDto.getUserId()).get();
 
 		Enrollement enrollement = new Enrollement();
 

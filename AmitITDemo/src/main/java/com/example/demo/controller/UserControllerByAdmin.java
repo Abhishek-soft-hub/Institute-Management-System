@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.User;
+import com.example.demo.entity.Users;
 import com.example.demo.service.UserService;
 
 @RestController
@@ -29,20 +29,20 @@ public class UserControllerByAdmin {
 	}
 
 	@PatchMapping("user/update/{id}")
-	public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody User user) {
+	public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody Users user) {
 		userService.updateUser(id, user);
 		return new ResponseEntity<String>("User are updated", HttpStatus.OK);
 	}
 
 	@GetMapping("user/{id}")
-	public ResponseEntity<User> getUser(@PathVariable int id) {
-		return new ResponseEntity<User>(userService.getUser(id), HttpStatus.OK);
+	public ResponseEntity<Users> getUser(@PathVariable int id) {
+		return new ResponseEntity<Users>(userService.getUser(id), HttpStatus.OK);
 
 	}
 
 	@GetMapping("users")
-	public ResponseEntity<List<User>> users() {
-		return new ResponseEntity<List<User>>(userService.users(), HttpStatus.OK);
+	public ResponseEntity<List<Users>> users() {
+		return new ResponseEntity<List<Users>>(userService.users(), HttpStatus.OK);
 
 	}
 

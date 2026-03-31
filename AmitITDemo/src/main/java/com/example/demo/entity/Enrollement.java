@@ -32,5 +32,5 @@ public class Enrollement {
 	private Batches batch;
 	@OneToOne
 	@JoinColumn(name = "userId")
-	private User user;
+	private Users user;
 }
